@@ -53,6 +53,7 @@ module Resque
       # passed the same arguments as `perform`, that is, your job's
       # payload.
       def lock(*args)
+        args.map! { |a| a.is_a?(Symbol) ? a.to_s : a }
         "lock:#{name}-#{args.to_s}"
       end
 
